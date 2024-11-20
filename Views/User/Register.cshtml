@@ -1,0 +1,57 @@
+﻿@model WebStock.Models.User
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="w-full max-w-md bg-white rounded-lg shadow-lg p-6">
+        <h1 class="text-2xl font-bold text-center text-blue-600 mb-6">Create an Account</h1>
+        <form asp-action="Register" method="post" class="space-y-4">
+            @Html.AntiForgeryToken()
+
+            <!-- Full Name Field -->
+            <div>
+                <label asp-for="Name" class="block text-sm font-medium text-gray-700"></label>
+                <input asp-for="Name" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                <span asp-validation-for="Name" class="text-red-500 text-sm"></span>
+            </div>
+
+            <!-- Username Field -->
+            <div>
+                <label asp-for="UserName" class="block text-sm font-medium text-gray-700"></label>
+                <input asp-for="UserName" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                <span asp-validation-for="UserName" class="text-red-500 text-sm"></span>
+            </div>
+
+            <!-- Email Field -->
+            <div>
+                <label asp-for="Email" class="block text-sm font-medium text-gray-700"></label>
+                <input asp-for="Email" type="email" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                <span asp-validation-for="Email" class="text-red-500 text-sm"></span>
+            </div>
+
+            <!-- Password Field -->
+            <div>
+                <label asp-for="Password" class="block text-sm font-medium text-gray-700"></label>
+                <input asp-for="Password" type="password" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                <span asp-validation-for="Password" class="text-red-500 text-sm"></span>
+            </div>
+
+            <!-- Submit Button -->
+            <div>
+                <button type="submit"
+                        class="w-full px-4 py-2 bg-blue-600 text-white font-medium text-sm rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    Register
+                </button>
+            </div>
+        </form>
+
+        <!-- Already Have Account -->
+        <p class="text-sm text-center text-gray-600 mt-4">
+            Already have an account? <a asp-action="Login" class="text-blue-600 hover:underline">Login</a>
+        </p>
+    </div>
+</div>

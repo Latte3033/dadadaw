@@ -1,0 +1,47 @@
+﻿@model WebStock.Models.User
+
+<div class="max-w-4xl mx-auto my-10 p-6 bg-white rounded-lg shadow-lg">
+    <div class="text-center">
+        <h2 class="text-3xl font-semibold text-gray-800">Welcome, @Model.UserName</h2>
+        <p class="text-xl text-gray-600 mt-2">Here are your account details:</p>
+    </div>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="bg-green-100 text-green-800 p-4 rounded-lg mb-6">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+    <div class="mt-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <!-- Username Card -->
+            <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                <h3 class="text-lg font-medium text-gray-700">Username</h3>
+                <p class="text-lg text-gray-900 mt-2">@Model.UserName</p>
+            </div>
+
+            <!-- Email Card -->
+            <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                <h3 class="text-lg font-medium text-gray-700">Email</h3>
+                <p class="text-lg text-gray-900 mt-2">@Model.Email</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Log Out Button -->
+    <div class="mt-8 text-center">
+        <a href="@Url.Action("EmailList", "User")"
+           class="inline-block px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition duration-300">
+            My Email
+        </a>
+    </div>
+
+
+    <!-- Log Out Button -->
+    <div class="mt-8 text-center">
+        <a href="@Url.Action("Logout", "User")"
+           class="inline-block px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition duration-300">
+            Log Out
+        </a>
+    </div>
+</div>
