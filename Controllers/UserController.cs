@@ -178,7 +178,7 @@ namespace WebStock.Controllers
             return View(model);
         }
 
-        // GET: User/Logout
+        
         public IActionResult Logout()
         {
             _logger.LogInformation("User logged out.");
@@ -186,5 +186,58 @@ namespace WebStock.Controllers
             TempData["SuccessMessage"] = "You have logged out successfully.";
             return RedirectToAction("Login");
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken] 
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                
+                var email = _context.EmailList.FirstOrDefault(e => e.Id == id);
+                if (email == null)
+                {
+                    return NotFound(); 
+                }
+
+                
+                _context.EmailList.Remove(email);
+                _context.SaveChanges();
+
+                TempData["SuccessMessage"] = "Email has been deleted successfully.";
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                
+                TempData["ErrorMessage"] = "An error occurred while deleting the email. Please try again.";
+                return RedirectToAction("Index");
+            }
+       
+        }
+
+        // GET: User/ViewDetails/{id}
+        public IActionResult ViewDetails(int id)
+        {
+            if (!IsUserLoggedIn()) return RedirectToAction("Login");
+
+            // ดึงข้อมูลอีเมลจากฐานข้อมูล
+            var email = _context.EmailDraft.FirstOrDefault(e => e.Id == id);
+            if (email == null)
+            {
+                TempData["ErrorMessage"] = "Email not found.";
+                return RedirectToAction("EmailList");
+            }
+
+            // อัปเดตสถานะเป็น "read" หากยังเป็น "unread"
+            if (email.Status == "unread")
+            {
+                email.Status = "read";
+                _context.SaveChanges();
+            }
+
+            // ส่งข้อมูลอีเมลไปยัง View
+            return View("ViewDetails", email);
+        }
+
     }
 }

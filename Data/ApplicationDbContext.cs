@@ -10,5 +10,8 @@ namespace WebStock.Data
         }
         public DbSet<User> Users { get; set; }
         public DbSet<EmailDraft> EmailDraft { get; set; }
+        public DbSet <EmailDraft> EmailList { get; internal set; }
+
     }
+    
 }
