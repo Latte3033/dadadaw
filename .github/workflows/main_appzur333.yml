@@ -26,7 +26,8 @@ jobs:
         run: nuget restore
 
       - name: Publish to folder
-        run: run:msbuild /nologo /verbosity:m /p:DeployOnBuild=true /p:OutputPath=$(Build.SourcesDirectory)/published
+        run: run:msbuild /nologo /verbosity:m /p:DeployOnBuild=true /p:OutputPath=$(System.DefaultWorkingDirectory)/published
+
 
       - name: Debug Output Path
         run: dir ./published
