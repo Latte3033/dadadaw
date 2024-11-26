@@ -31,11 +31,15 @@ jobs:
       - name: Debug Output Path
         run: dir ${{ github.workspace }}/published  # ตรวจสอบว่าไฟล์ถูกสร้างใน path ที่ถูกต้อง
 
+      - name: Create Zip Package
+        run: |
+          Compress-Archive -Path ${{ github.workspace }}/published/* -DestinationPath ${{ github.workspace }}/published.zip
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: ASP-app
-          path: ${{ github.workspace }}/published
+          path: ${{ github.workspace }}/published.zip
 
   deploy:
     runs-on: windows-latest
@@ -65,6 +69,6 @@ jobs:
         with:
           app-name: 'appzur333'
           slot-name: 'Production'
-          package: ${{ github.workspace }}/published # ใช้ path ที่ถูกต้อง
+          package: ${{ github.workspace }}/published.zip
 
           
