@@ -62,5 +62,6 @@ jobs:
         with:
           app-name: 'appzur333'
           slot-name: 'Production'
-          package: .
+          package: ./ASP-app
+          
           
