@@ -28,6 +28,10 @@ jobs:
       - name: Publish to folder
         run: msbuild /nologo /verbosity:m /p:DeployOnBuild=true /p:OutputPath=./published
 
+      - name: Debug Output Path
+        run: dir ./published
+
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
